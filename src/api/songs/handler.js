@@ -45,13 +45,14 @@ class SongsHandler {
         }
     }
 
-    async getSongsHandler(){
-        const songs = await this._service.getSongs()
+    async getSongsHandler(request, h){
+        const queryParams = request.query
+        const songs = await this._service.getSongs(queryParams)
         return {
             status: 'success',
             message: 'mendapatkan seluruh lagu',
             data: {
-                songs
+                songs: songs
             }
         }
     }
