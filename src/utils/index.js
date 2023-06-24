@@ -1,15 +1,11 @@
 const mapDBAlbumsToModel = ({
 id,
 name,
-year,
-created_at,
-updated_at
+year
 }) => ({
     id,
     name,
-    year,
-    createdAt: created_at,
-    updatedAt: updated_at
+    year
 })
 
 const mapDBSongsToModel = ({
@@ -30,4 +26,14 @@ const mapDBSongsToModel = ({
     albumId
 })
 
-module.exports = {mapDBAlbumsToModel, mapDBSongsToModel}
+const mapDBSongsAlbumIdToModel = ({
+    id,
+    title,
+    performer
+}) => ({
+    id,
+    title,
+    performer
+})
+
+module.exports = {mapDBAlbumsToModel, mapDBSongsToModel, mapDBSongsAlbumIdToModel}
