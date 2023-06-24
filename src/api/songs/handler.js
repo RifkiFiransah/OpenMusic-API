@@ -46,14 +46,32 @@ class SongsHandler {
     }
 
     async getSongsHandler(request, h){
-        const queryParams = request.query
-        const songs = await this._service.getSongs(queryParams)
-        return {
-            status: 'success',
-            message: 'mendapatkan seluruh lagu',
-            data: {
-                songs: songs
+        try {
+            const queryParams = request.query
+            const songs = await this._service.getSongs(queryParams)
+            return {
+                status: 'success',
+                message: 'mendapatkan seluruh lagu',
+                data: {
+                    songs: songs
+                }
             }
+        } catch (error) {
+                if(error instanceof ClientError){
+                    const response = h.response({
+                        status: 'fail',
+                        message: error.message
+                    })
+                    response.code(error.statusCode)
+                    return response
+                }
+                // Server Error
+                const response = h.response({
+                    status: 'error',
+                    message: 'maaf terjadi kesalahan pada server'
+                })
+                response.code(500)
+                return response
         }
     }
 
