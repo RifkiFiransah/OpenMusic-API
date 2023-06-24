@@ -47,30 +47,12 @@ class AlbumsHandler {
     }
 
     async getAlbumsHandler(){
-        try{
-            const albums = await this._service.getAlbums()
-            return {
-                status: 'success',
-                data: {
-                    albums
-                }
+        const albums = await this._service.getAlbums()
+        return {
+            status: 'success',
+            data: {
+                albums
             }
-        } catch(error){
-            if(error instanceof ClientError){
-                const response = h.response({
-                    status: 'fail',
-                    message: error.message
-                })
-                response.code(error.statusCode)
-                return response
-            }
-            // Server Error
-            const response = h.response({
-                status: 'error',
-                message: 'maaf, terjadi kesalahan pada server'
-            })
-            response.code(500)
-            return response
         }
     }
 
