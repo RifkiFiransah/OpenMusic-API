@@ -11,7 +11,7 @@
 - Clone Repository
 
 
->    `git clone`
+>    `git clone https://github.com/RifkiFiransah/OpenMusic-API.git`
 
  
 - Masuk Ke Directory
