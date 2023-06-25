@@ -2,7 +2,7 @@ const routes = (handler) => [
     {
         method: 'POST',
         path: '/albums',
-        handler: handler.postAlbumHandler,
+        handler: (request, h) => handler.postAlbumHandler(request, h),
         options: {
             cors: {
                 origin: ['*']
@@ -12,22 +12,22 @@ const routes = (handler) => [
     {
         method: 'GET',
         path: '/albums',
-        handler: handler.getAlbumsHandler
+        handler: (request, h) => handler.getAlbumsHandler(request, h)
     },
     {
         method: 'GET',
         path: '/albums/{id}',
-        handler: handler.getAlbumByIdHandler
+        handler: (request, h) => handler.getAlbumByIdHandler(request, h)
     },
     {
         method: 'PUT',
         path: '/albums/{id}',
-        handler: handler.putAlbumByIdHandler
+        handler: (request, h) => handler.putAlbumByIdHandler(request, h)
     },
     {
         method: 'DELETE',
         path: '/albums/{id}',
-        handler: handler.deleteAlbumByIdHandler
+        handler: (request, h) => handler.deleteAlbumByIdHandler(request, h)
     },
 ]
 

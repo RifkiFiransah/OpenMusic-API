@@ -2,7 +2,7 @@ const routes = (handler) => [
     {
         method: 'POST',
         path: '/songs',
-        handler: handler.postSongHandler,
+        handler: (request, h) => handler.postSongHandler(request, h),
         options: {
             cors: {
                 origin: ['*']
@@ -12,22 +12,22 @@ const routes = (handler) => [
     {
         method: 'GET',
         path: '/songs',
-        handler: handler.getSongsHandler
+        handler: (request, h) => handler.getSongsHandler(request, h)
     },
     {
         method: 'GET',
         path: '/songs/{id}',
-        handler: handler.getSongByIdHandler
+        handler: (request, h) => handler.getSongByIdHandler(request, h)
     },
     {
         method: 'PUT',
         path: '/songs/{id}',
-        handler: handler.putSongByIdHandler
+        handler: (request, h) => handler.putSongByIdHandler(request, h)
     },
     {
         method: 'DELETE',
         path: '/songs/{id}',
-        handler: handler.deleteSongByIdHandler
+        handler: (request, h) => handler.deleteSongByIdHandler(request, h)
     }
 ]
 
