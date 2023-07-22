@@ -12,11 +12,10 @@ class SongsService {
     async addSong({title, year, genre, performer, duration, albumId}){
         const id = `song-${nanoid(16)}`
         const createdAt = new Date().toISOString()
-        const updatedAt = new Date().toISOString()
 
         const query = {
             text: "INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id",
-            values: [id, title, year, genre, performer, duration, albumId,createdAt, updatedAt]
+            values: [id, title, year, genre, performer, duration, albumId, createdAt, createdAt]
         }
         const result = await this._pool.query(query)
         if(!result.rows[0].id){
@@ -52,7 +51,7 @@ class SongsService {
             return rows
         }
         const result = await this._pool.query("SELECT id, title, performer FROM songs")
-        return result.rows.map(mapDBSongsToModel)
+        return result.rows
     }
 
     async getSongById(id){
@@ -61,7 +60,7 @@ class SongsService {
             values: [id]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new NotFoundError('lagu tidak ditemukan')
         }
         return result.rows.map(mapDBSongsToModel)[0]
@@ -74,7 +73,7 @@ class SongsService {
             values: [title, year, genre, performer, duration, updatedAt, id]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new NotFoundError('Gagal memperbarui lagu, id tidak ditemukan')
         }
         return result.rows.map(mapDBSongsToModel)[0]
@@ -86,7 +85,7 @@ class SongsService {
             values: [id]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new NotFoundError('lagu tidak ditemukan')
         }
         return result.rows.map(mapDBSongsToModel)[0]
