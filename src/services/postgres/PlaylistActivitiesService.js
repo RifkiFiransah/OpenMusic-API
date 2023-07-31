@@ -3,8 +3,9 @@ const { Pool } = require("pg");
 const NotFoundError = require("../../exceptions/NotFoundError");
 
 class PlaylistActivitiesService {
-  constructor(){
+  constructor(cacheService){
     this._pool = new Pool()
+    this._cacheService = cacheService
   }
 
   async addPlaylistActivity({playlistId, songId, userId, action}){
@@ -28,6 +29,7 @@ class PlaylistActivitiesService {
     if(!result.rows.length){
       throw new NotFoundError('Activity tidak ditemukan')
     }
+    await this._cacheService.set(`playlist_activities:${id}`, JSON.stringify(result.rows))
     return result.rows
   }
 }

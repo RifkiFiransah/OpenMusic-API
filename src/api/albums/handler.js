@@ -7,11 +7,6 @@ class AlbumsHandler {
         this._validator = validator
 
         autoBind(this)
-        // this.postAlbumHandler = this.postAlbumHandler.bind(this)
-        // this.getAlbumsHandler = this.getAlbumsHandler.bind(this)
-        // this.getAlbumByIdHandler = this.getAlbumByIdHandler.bind(this)
-        // this.putAlbumByIdHandler = this.putAlbumByIdHandler.bind(this)
-        // this.deleteAlbumByIdHandler = this.deleteAlbumByIdHandler.bind(this)
     }
     async postAlbumHandler(request, h){
         this._validator.ValidateAlbumPayload(request.payload)
@@ -39,7 +34,7 @@ class AlbumsHandler {
         }
     }
 
-    async getAlbumByIdHandler(request, h){   
+    async getAlbumByIdHandler(request){   
         const { id } = request.params
         const album = await this._service.getAlbumById(id)
         const songs = await this._service.getSongByAlbumId(id)
@@ -53,7 +48,7 @@ class AlbumsHandler {
         }
     }
 
-    async putAlbumByIdHandler(request, h){
+    async putAlbumByIdHandler(request){
         this._validator.ValidateAlbumPayload(request.payload)
         const { id } = request.params
         const {name, year} = request.payload
@@ -64,7 +59,7 @@ class AlbumsHandler {
         }
     }
 
-    async deleteAlbumByIdHandler(request, h){
+    async deleteAlbumByIdHandler(request){
         const { id } = request.params
         await this._service.deleteAlbumById(id)
         return {
