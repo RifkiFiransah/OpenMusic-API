@@ -9,7 +9,7 @@ class ExportsHandler {
     autoBind(this)
   }
 
-  async postExportHandler(request, h){
+  async postExportPlaylistHandler(request, h){
     this._validator.validateExportSongsPayload(request.payload)
     const userId =  request.auth.credentials.id
     const {id: playlistId} = request.params

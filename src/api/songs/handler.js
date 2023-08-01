@@ -1,4 +1,3 @@
-// const ClientError = require("../../exceptions/ClientError");
 const autoBind = require('auto-bind')
 
 class SongsHandler {
@@ -50,7 +49,6 @@ class SongsHandler {
     async putSongByIdHandler(request){
         this._validator.ValidateSongPayload(request.payload)
         const { id } = request.params
-        // const { title, year, genre, performer, duration, albumI } = request.payload
         await this._service.editSongById(id, request.payload)
         return {
             status: 'success',

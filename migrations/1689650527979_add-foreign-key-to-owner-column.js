@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
 
-exports.shorthands = undefined;
-
 exports.up = pgm => {
   // Membuat user baru 
   pgm.sql("INSERT INTO users VALUES('old_playlists', 'old_playlists', 'old_playlists', 'old_playlists')")

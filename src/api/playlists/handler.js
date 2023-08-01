@@ -8,13 +8,6 @@ class PlaylistsHandler {
     this._validator = validator
 
     autoBind(this)
-    // this.postPlaylistHandler = this.postPlaylistHandler.bind(this)
-    // this.getPlaylistHandler = this.getPlaylistHandler.bind(this)
-    // this.deletePlaylistByIdHandler = this.deletePlaylistByIdHandler.bind(this)
-    // this.postPlaylistSongsByIdHandler = this.postPlaylistSongsByIdHandler.bind(this)
-    // this.getPlaylistSongsByIdHandler = this.getPlaylistSongsByIdHandler.bind(this)
-    // this.deletePlaylistSongsByIdHandler = this.deletePlaylistSongsByIdHandler.bind(this)
-    // this.getPlaylistActivitiesByIdHandler = this.getPlaylistActivitiesByIdHandler.bind(this)
   }
 
   async postPlaylistHandler(request, h){
@@ -34,7 +27,6 @@ class PlaylistsHandler {
   }
 
   async getPlaylistHandler(request){
-    // const {id: owner} = request.auth.credentials
     const playlists = await this._service.getPlaylists(request.auth.credentials)
     return {
       status: 'success',
