@@ -29,7 +29,7 @@ class AlbumLikesService {
     try {
       const result = await this._cacheService.get(`likes:${albumId}`)
       return {
-        likes: JSON.stringify(result),
+        likes: JSON.parse(result),
         cached: true
       }
     } catch (error) {

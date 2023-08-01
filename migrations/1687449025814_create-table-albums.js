@@ -12,10 +12,6 @@ exports.up = pgm => {
             type: 'INT',
             notNull: true
         },
-        cover: {
-            type: 'TEXT',
-            notNull: true
-        },
         created_at: {
             type: 'TEXT',
             notnull: true

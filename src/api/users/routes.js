@@ -12,7 +12,7 @@ const routes = (handler) => [
   {
     method: 'GET',
     path: '/users',
-    handler: (request, h) => handler.getUserByUsernameHandler(request, h) 
+    handler: (request) => handler.getUserByUsernameHandler(request) 
   }
 ]
 
