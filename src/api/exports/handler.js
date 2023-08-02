@@ -13,12 +13,13 @@ class ExportsHandler {
     this._validator.validateExportSongsPayload(request.payload)
     const userId =  request.auth.credentials.id
     const {id: playlistId} = request.params
+    const {targetEmail} = request.payload
 
     await this._playlistsService.verifyPlaylistAccess(playlistId, userId)
-    const playlist = await this._playlistsService.getPlaylistById(playlistId)
+    const playlist = await this._playlistsService.getPlaylistSongs(playlistId)
 
     const message = {
-      targetEmail: request.payload.targetEmail,
+      targetEmail,
       playlist
     }
 

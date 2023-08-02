@@ -12,15 +12,16 @@ class AlbumLikesHandler {
       const {id} = request.params
       const {id: userId} = request.auth.credentials
       await this._albumsService.getAlbumById(id)
-      const like = await this._service.verifyUserLiked(id, userId)
-      if(like){
-        await this._service.deleteLike(id, userId)
-        const response = h.response({
-          status: 'success',
-          message: 'Anda menyukai album ini'
-        }).code(201)
-        return response
-      }
+      await this._service.verifyUserLiked(id, userId)
+      // const like = await this._service.verifyUserLiked(id, userId)
+      // if(like){
+      //   await this._service.deleteLike(id, userId)
+      //   const response = h.response({
+      //     status: 'success',
+      //     message: 'Anda menyukai album ini'
+      //   }).code(201)
+      //   return response
+      // }
       await this._service.addLikeToAlbum(id, userId)
       const response = h.response({
         status: 'success',

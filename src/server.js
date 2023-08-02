@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
 const Jwt = require('@hapi/jwt')
-const inert = require('@hapi/inert')
+const Inert = require('@hapi/inert')
 const path = require('path')
 
 // Albums
@@ -57,7 +57,6 @@ const CacheService = require('./services/redis/CacheService')
 const ClientError = require('./exceptions/ClientError')
 
 const init = async() => {
-    const storageService = new StorageService(path.resolve(__dirname, 'api/uploads/file/cover'))
     const cacheService = new CacheService()
     const collaborationsService = new CollaborationsService()
     const playlistActivitiesService = new PlaylistActivitiesService(cacheService)
@@ -68,6 +67,7 @@ const init = async() => {
     const playlistsService = new PlaylistsService(collaborationsService)
     const playlistSongsService = new PlaylistSongsService(playlistActivitiesService)
     const albumLikesService = new AlbumLikesService(albumsService, cacheService)
+    const storageService = new StorageService(path.resolve(__dirname, 'api/uploads/file/images'))
 
     const server = Hapi.server({
         port: process.env.PORT,
@@ -85,7 +85,7 @@ const init = async() => {
             plugin: Jwt
         },
         {
-            plugin: inert
+            plugin: Inert
         }
     ])
 
