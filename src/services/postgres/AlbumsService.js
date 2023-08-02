@@ -19,7 +19,7 @@ class AlbumsService {
             values: [id, name, year, createdAt, updatedAt]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new InvariantError('Album gagal ditambahkan')
         }
         return result.rows[0].id
@@ -36,7 +36,7 @@ class AlbumsService {
             values: [id]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new NotFoundError('Album tidak ditemukan')
         }
         return result.rows.map(mapDBAlbumsToModel)[0]
@@ -49,7 +49,7 @@ class AlbumsService {
             values: [name, year, updatedAt, id]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new NotFoundError('Gagal memperbarui album. id tidak ditemukan')
         }
         return result.rows.map(mapDBAlbumsToModel)[0]
@@ -61,7 +61,7 @@ class AlbumsService {
             values: [id]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new NotFoundError('Album tidak ditemukan')
         }
         return result.rows.map(mapDBAlbumsToModel)[0]
@@ -69,8 +69,8 @@ class AlbumsService {
 
     async getSongByAlbumId(id){
         const query = {
-            text: 'SELECT id, title, performer FROM songs WHERE album_id = $1',
-            values: [id]
+            text: `SELECT * FROM songs WHERE album_id = $1`,
+            values: [id],
         }
         const result = await this._pool.query(query)
         return result.rows.map(mapDBSongsAlbumIdToModel)
@@ -82,7 +82,7 @@ class AlbumsService {
             values: [coverUrl, albumId]
         }
         const result = await this._pool.query(query)
-        if(!result.rows.length){
+        if(!result.rowCount){
             throw new NotFoundError('Album tidak ditemukan')
         }
     }

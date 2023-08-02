@@ -1,3 +1,5 @@
 node_modules
 .env
 .prod.env
+src/api/uploads/file/cover
+src/api/uploads/file/images
